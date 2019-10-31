@@ -1,0 +1,21 @@
+{
+  "name": "knex-query-extractor",
+  "description": "Extract Knex.js queries from a file.",
+  "version": "1.0.0",
+  "author": "Peter deHaan",
+  "bin": "cli.js",
+  "bugs": {
+    "url": "https://github.com/pdehaan/knex-query-extractor/issues"
+  },
+  "homepage": "https://github.com/pdehaan/knex-query-extractor#readme",
+  "keywords": ["knex.js"],
+  "license": "MPL-2.0",
+  "main": "lib.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdehaan/knex-query-extractor.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
