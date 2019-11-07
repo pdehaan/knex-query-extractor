@@ -7,7 +7,7 @@ function knexQueryExtractor(file, ops = []) {
   if (!Array.isArray(ops)) {
     ops = ops.toString().split(",");
   }
-  const queries = db.match(/await knex\((.|\n)*?;/gm).map(query => {
+  const queries = db.match(/await knex(<\w*?>)?\((.|\n)*?;/gm).map(query => {
     query = query.replace(/\s{2,}/g, "");
     const idx = query.indexOf(") as ");
     if (idx !== -1) {
