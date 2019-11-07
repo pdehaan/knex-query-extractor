@@ -7,8 +7,14 @@ function knexQueryExtractor(file, ops = []) {
   if (!Array.isArray(ops)) {
     ops = ops.toString().split(",");
   }
-  const queries = db.match(/await knex(<\w*?>)?\((.|\n)*?;/gm).map(query => {
-    query = query.replace(/\s{2,}/g, "");
+  let queries = db.match(/await knex(<\w*?>)?\((.|\n)*?;/gm);
+  if (!queries) {
+    return [];
+  }
+
+  queries = queries.map(query => {
+    // Remove consecutive spaces and convert double quotes to single quotes (which is risky). #yolo
+    query = query.replace(/\s{2,}/g, "").replace(/"/g, "'");
     const idx = query.indexOf(") as ");
     if (idx !== -1) {
       // TypeScript workaround to avoid funky results like: `) as unknown) as Version;`
@@ -24,5 +30,5 @@ function knexQueryExtractor(file, ops = []) {
   if (!ops.length) {
     return queries;
   }
-  return queries.filter(({ op }) => ops.includes(op));
+  return queries.filter(res => ops.includes(res.op));
 }
